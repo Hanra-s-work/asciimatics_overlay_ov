@@ -6,6 +6,21 @@ __pycache__/
 # C extensions
 *.so
 
+# Vscode elements
+**/.vscode/**
+
+# Python environement
+**/.venv/**
+**/env/**
+**/wenv/**
+**/lenv/**
+**/menv/**
+**/uenv/**
+
+# temporary files
+tmp.*
+*.tmp
+
 # Distribution / packaging
 .Python
 build/
