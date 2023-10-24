@@ -83,7 +83,7 @@ class Colour:
             "white": self.colour_white
         }
 
-    def pick_colour(self, colour_name: str) -> None:
+    def pick_colour(self, colour_name: str) -> int:
         """ Pick a colour from the human bind """
         if colour_name in self.human_bind:
             return self.human_bind[colour_name]

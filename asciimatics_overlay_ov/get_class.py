@@ -82,9 +82,9 @@ class Get:
         """ Get the event type """
         return self.my_asciimatics_overlay_main_event.type
 
-    def get_event_key_code(self) -> int:
+    def get_event_key_code(self) -> int or None:
         """ Get the event key code """
-        return self.my_asciimatics_overlay_main_event.key_code
+        return self.my_asciimatics_overlay_main_screen.get_key()
 
     def get_posx(self) -> int:
         """ Get the x position of the mouse """
