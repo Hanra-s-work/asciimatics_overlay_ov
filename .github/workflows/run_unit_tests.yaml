@@ -173,4 +173,5 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pytest -s
+          command="pytest -s"
+          sudo docker run -v $(pwd):/mnt -w /mnt/ fedora:34 /bin/bash -c $command
