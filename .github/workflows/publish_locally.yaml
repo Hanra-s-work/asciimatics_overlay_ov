@@ -1,4 +1,4 @@
-name: ask-question-gh-packages
+name: asciimatics-overlay-gh-packages
 
 on:
   push:

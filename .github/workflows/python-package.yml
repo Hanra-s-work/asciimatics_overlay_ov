@@ -1,4 +1,4 @@
-name: ask-question-pypi
+name: aciimatics-overlay-pypi
 on:
   push:
     tags:
