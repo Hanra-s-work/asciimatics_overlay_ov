@@ -173,5 +173,5 @@ jobs:
 
       - name: Test with pytest
         run: |
-          command="pytest -s"
-          sudo docker run -v $(pwd):/mnt -w /mnt/ fedora:34 /bin/bash -c $command
+          command="pip install pytest;pip install -r requirements.txt;ls;pytest -s"
+          sudo docker run -v $(pwd):/mnt -w /mnt/ python:${{matrix.python-version}} /bin/bash -c $command
