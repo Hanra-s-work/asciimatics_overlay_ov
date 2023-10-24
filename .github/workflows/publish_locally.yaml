@@ -15,6 +15,7 @@ env:
   IS_RELEASE: is_release.txt
   MATRIX_VERSION_PUBLISHING: "3.10"
   SOURCE_CODE_PATH: asciimatics_overlay_ov/asciimatics_overlay_main.py
+  SOURCE_CODE_REQUIREMENTS_PATH: asciimatics_overlay_ov/requirements.txt
 
 jobs:
   build:
@@ -147,7 +148,7 @@ jobs:
     
     - name: Test with pytest
       run: |
-        command="pip install --upgrade pip;pip install pytest;pip install -r requirements.txt;ls;pytest -s"
+        command="pip install --upgrade pip;pip install pytest;pip install -r ${{env.SOURCE_CODE_REQUIREMENTS_PATH}};pytest -s"
         sudo docker run -v $(pwd):/mnt -w /mnt/ python:${{matrix.python-version}} /bin/bash -c "$command"
 
     - name: building the package
