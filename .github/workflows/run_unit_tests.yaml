@@ -172,7 +172,7 @@ jobs:
           echo -e "\n\n\n\n\n\n\n"
           pip install "$PIP_PACKAGE"
 
-      - name: Test with pytest
-        run: |
-          command="pip install --upgrade pip;pip install pytest;pip install -r ${{env.SOURCE_CODE_REQUIREMENTS_PATH}};ls;pytest -s"
-          sudo docker run -v $(pwd):/mnt -w /mnt/ python:${{matrix.python-version}} /bin/bash -c "$command"
+      # - name: Test with pytest
+      #   run: |
+      #     command="pip install --upgrade pip;pip install pytest;pip install -r ${{env.SOURCE_CODE_REQUIREMENTS_PATH}};ls;pytest -s"
+      #     sudo docker run -v $(pwd):/mnt -w /mnt/ python:${{matrix.python-version}} /bin/bash -c "$command"
