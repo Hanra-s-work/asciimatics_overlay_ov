@@ -190,7 +190,7 @@ class FrameNodes:
             fit=fit
         )
 
-    def add_filebrowser(self, height: int = 10, root: str = ".", name: str = "File browser", on_select: object = None, on_change: object = None, file_filter: str = "*.txt") -> WIG.FileBrowser:
+    def add_filebrowser(self, height: int = 10, root: str = ".", name: str = "File browser", on_select: object = None, on_change: object = None, file_filter: str = ".*.txt$") -> WIG.FileBrowser:
         """
         Add a file browser to the layout
         :param height: The desired height for this widget.
@@ -200,7 +200,9 @@ class FrameNodes:
         :param on_change: Optional function that gets called on any movement of the selection.
         :param file_filter: Optional RegEx string that can be passed in to filter the files to be displayed.
 
-        Most people will want to use a filter to finx files with a particular extension. In this case, you must use a regex that matches to the end of the line - e.g. use ".*.txt$" to find files ending with ".txt". This ensures that you don't accidentally pick up files containing the filter.
+        Most people will want to use a filter to find files with a particular extension.
+        In this case, you must use a regex that matches to the end of the line - e.g. use ".*.txt$" to find files ending with ".txt".
+        This ensures that you don't accidentally pick up files containing the filter.
         :return: a FileBrowser instance
         """
         return WIG.FileBrowser(

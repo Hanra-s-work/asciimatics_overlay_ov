@@ -15,8 +15,8 @@ class HelloWorld(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
     def __init__(self, screen):
         super(HelloWorld, self).__init__(
             screen,
-            screen.height // 2,
-            screen.width // 2,
+            screen.height,
+            screen.width,
             has_border=True,
             title="Hello World"
         )

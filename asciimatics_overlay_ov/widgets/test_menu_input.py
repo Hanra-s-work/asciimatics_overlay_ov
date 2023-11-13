@@ -16,6 +16,7 @@ from .list_fields import ListFields
 from .checkboxes import Checkboxes
 from .radiobuttons import Radiobuttons
 from .date_and_time_picker import DateAndTime
+from .file_browser import FileBrowser
 
 
 class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
@@ -24,8 +25,8 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
     def __init__(self, screen):
         super(MainMenu, self).__init__(
             screen,
-            screen.height // 2,
-            screen.width // 2,
+            screen.height,
+            screen.width,
             has_border=True,
             title="Main Menu"
         )
@@ -33,7 +34,7 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
         self.frame_node = FrameNodes()
 
         # Define a layout with three columns
-        self.layout = WIG.Layout([1, 1, 1])
+        self.layout = WIG.Layout([1, 1, 1], fill_frame=True)
         self.add_layout(self.layout)
 
         self.change_screen_background(
@@ -96,6 +97,14 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
         )
         self.layout.add_widget(
             self.add_button(
+                text="Test file browser",
+                on_click=self._test_filebrowser,
+                name=None
+            ),
+            0
+        )
+        self.layout.add_widget(
+            self.add_button(
                 text="Quit",
                 on_click=self._quit,
                 name=None
@@ -108,6 +117,9 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
 
     def _test_input(self) -> None:
         raise NextScene("InputField")
+
+    def _test_filebrowser(self) -> None:
+        raise NextScene("FileBrowser")
 
     def _test_list_fields(self) -> None:
         raise NextScene("ListFields")
@@ -130,9 +142,9 @@ class Main:
 
     def __init__(self, success: int = 0, error: int = 1, screen: Screen = None, last_scene: Scene = None) -> None:
         self.success = success
+        self.screen = screen
         self.error = error
         self.last_scene = last_scene
-        self.screen = screen
 
     def create_scenes(self, screen: Screen) -> int:
         """ Create the screens that will be used for the windows """
@@ -143,7 +155,8 @@ class Main:
             Scene([ListFields(screen)], -1, name="ListFields"),
             Scene([Checkboxes(screen)], -1, name="Checkboxes"),
             Scene([Radiobuttons(screen)], -1, name="Radiobuttons"),
-            Scene([DateAndTime(screen)], -1, name="DateAndTime")
+            Scene([DateAndTime(screen)], -1, name="DateAndTime"),
+            Scene([FileBrowser(screen)], -1, name="FileBrowser")
         ]
         return scenes
 
@@ -164,7 +177,7 @@ class Main:
             try:
                 Screen.wrapper(
                     self.main  # ,
-                    # catch_interrupt=True
+                    # catch_interrupt=True,
                 )
                 return self.success
             except ResizeScreenError as e:

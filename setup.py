@@ -13,7 +13,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         "asciimatics==1.14.0",
-        "english-words==2.0.1"
+        "english-words==2.0.1",
+        "python-magic==0.4.7"
     ],
     author="Henry Letellier",
     author_email="henrysoftwarehouse@protonmail.com",
