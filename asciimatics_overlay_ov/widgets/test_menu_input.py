@@ -17,6 +17,7 @@ from .checkboxes import Checkboxes
 from .radiobuttons import Radiobuttons
 from .date_and_time_picker import DateAndTime
 from .file_browser import FileBrowser
+from .non_window_hello_world import NonWindowHelloWorld
 
 
 class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
@@ -105,6 +106,14 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
         )
         self.layout.add_widget(
             self.add_button(
+                text="(Epilepsy warning) Non windowed hello world",
+                on_click=self._test_non_windows_hello_world,
+                name=None
+            ),
+            0
+        )
+        self.layout.add_widget(
+            self.add_button(
                 text="Quit",
                 on_click=self._quit,
                 name=None
@@ -133,6 +142,9 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
     def _test_date_and_time_picker(self) -> None:
         raise NextScene("DateAndTime")
 
+    def _test_non_windows_hello_world(self) -> None:
+        raise NextScene("NonWindowHelloWorld")
+
     def _quit(self) -> None:
         raise StopApplication("User pressed quit")
 
@@ -156,7 +168,9 @@ class Main:
             Scene([Checkboxes(screen)], -1, name="Checkboxes"),
             Scene([Radiobuttons(screen)], -1, name="Radiobuttons"),
             Scene([DateAndTime(screen)], -1, name="DateAndTime"),
-            Scene([FileBrowser(screen)], -1, name="FileBrowser")
+            Scene([FileBrowser(screen)], -1, name="FileBrowser"),
+            Scene([NonWindowHelloWorld(screen)], -
+                  1, name="NonWindowHelloWorld")
         ]
         return scenes
 
