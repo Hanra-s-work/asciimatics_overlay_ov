@@ -12,7 +12,8 @@ setuptools.setup(
     version='1.0.0',
     packages=setuptools.find_packages(),
     install_requires=[
-        "asciimatics==1.14.0"
+        "asciimatics==1.14.0",
+        "english-words==2.0.1"
     ],
     author="Henry Letellier",
     author_email="henrysoftwarehouse@protonmail.com",

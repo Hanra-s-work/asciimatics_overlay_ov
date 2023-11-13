@@ -1,15 +1,15 @@
 """
 File in charge of acting as the main script of the library when it is called as a standalone
 """
-from asciimatics_overlay_ov import AsciimaticsOverlay
+from time import sleep
+from random import randint
 from asciimatics.event import Event
 from asciimatics.screen import Screen
-from random import randint
-from time import sleep
+from asciimatics_overlay_ov import AsciimaticsOverlay
+import widgets as WI
 
 
 print("Hello world")
-
 
 SUCCESS = 0
 ERROR = 1
@@ -162,10 +162,24 @@ def main(screen: Screen) -> int:
 
 
 if __name__ == "__main__":
-    error = 1
+    SUCCESS = 0
+    ERROR = 1
+    SCREEN = None
+    LAST_SCENE = None
+    WII = WI.Main(
+        success=SUCCESS,
+        error=ERROR,
+        screen=SCREEN,
+        last_scene=LAST_SCENE
+    )
     try:
-        status = Screen.wrapper(main)
-        exit(status)
+        STATUS = WII.run()
     except Exception as err:
         print(f"Error: {err}")
-        exit(error)
+        exit(ERROR)
+    if STATUS == SUCCESS:
+        try:
+            exit(Screen.wrapper(main))
+        except Exception as err:
+            print(f"Error: {err}")
+            exit(ERROR)

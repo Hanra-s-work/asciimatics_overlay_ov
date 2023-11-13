@@ -6,7 +6,9 @@ File in charge of managing the colours for asciimatics
 class Colour:
     """ The class in charge of managing the colours for asciimatics """
 
-    def __init__(self) -> None:
+    your_selected_colour = 0
+
+    def __init__(self, colour_name: str = None) -> None or int:
         self.windows_bind = dict()
         self.linux_bind = dict()
         self.human_bind = dict()
@@ -22,6 +24,9 @@ class Colour:
         self._create_windows_bind()
         self._create_linux_bind()
         self._create_human_bind()
+        self.your_selected_colour = -1
+        if colour_name is not None:
+            self.your_selected_colour = self.pick_colour(colour_name)
 
     def _create_linux_bind(self) -> None:
         """ Create the linux bind """
@@ -86,9 +91,13 @@ class Colour:
     def pick_colour(self, colour_name: str) -> int:
         """ Pick a colour from the human bind """
         if colour_name in self.human_bind:
-            return self.human_bind[colour_name]
+            self.your_selected_colour = self.human_bind[colour_name]
+            return self.your_selected_colour
         if colour_name in self.windows_bind:
-            return self.windows_bind[colour_name]
+            self.your_selected_colour = self.windows_bind[colour_name]
+            return self.your_selected_colour
         if colour_name in self.linux_bind:
-            return self.linux_bind[colour_name]
-        return self.human_bind["default"]
+            self.your_selected_colour = self.linux_bind[colour_name]
+            return self.your_selected_colour
+        self.your_selected_colour = self.human_bind["default"]
+        return self.your_selected_colour
