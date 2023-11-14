@@ -7,7 +7,7 @@ import asciimatics.widgets as WIG
 from asciimatics.event import Event
 from asciimatics.exceptions import NextScene
 from asciimatics_overlay_ov import AsciiMaticsOverlayMain
-from .frame_nodes import FrameNodes
+from asciimatics_overlay_ov.widgets import FrameNodes
 from .list_data import LIST_DATA
 
 

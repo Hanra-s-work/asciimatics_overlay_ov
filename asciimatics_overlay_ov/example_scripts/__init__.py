@@ -1,4 +1,4 @@
-from test_menu_input import Main
+from .test_menu_input import Main
 
 if __name__ == "__main__":
     SUCCESS = 0

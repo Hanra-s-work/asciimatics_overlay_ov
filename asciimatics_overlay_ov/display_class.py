@@ -11,41 +11,76 @@ class Display:
     def __init__(self, screen: SC) -> None:
         self.my_asciimatics_overlay_main_screen = screen
 
-    def mvprintw(self, text: str, posx: int, posy: int, width: int = 0) -> None:
+    def mvprintw(self, text: str, posx: int, posy: int, width: int = 0, parent_screen: SC = None) -> None:
         """ Display a string at a specific location """
-        self.my_asciimatics_overlay_main_screen.print_at(
-            text,
-            posx,
-            posy,
-            width
-        )
+        if parent_screen is None:
+            self.my_asciimatics_overlay_main_screen.print_at(
+                text,
+                posx,
+                posy,
+                width
+            )
+        else:
+            parent_screen.print_at(
+                text,
+                posx,
+                posy,
+                width
+            )
 
-    def mvprintw_colour(self, text: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False) -> None:
+    def mvprintw_colour(self, text: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False, parent_screen: SC = None) -> None:
         """ Display a string at a specific location with a specific colour """
-        self.my_asciimatics_overlay_main_screen.print_at(
-            text,
-            posx,
-            posy,
-            colour,
-            attr,
-            bg,
-            transparent
-        )
+        if parent_screen is None:
+            self.my_asciimatics_overlay_main_screen.print_at(
+                text,
+                posx,
+                posy,
+                colour,
+                attr,
+                bg,
+                transparent
+            )
+        else:
+            parent_screen.print_at(
+                text,
+                posx,
+                posy,
+                colour,
+                attr,
+                bg,
+                transparent
+            )
 
-    def print_array(self, array: list, seperator: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False) -> None:
+    def print_array(self, array: list, seperator: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False, parent_screen: SC = None) -> None:
         """ Display an array at a specific location with a specific colour """
-        self.my_asciimatics_overlay_main_screen.print_at(
-            seperator.join(array),
-            posx,
-            posy,
-            colour,
-            attr,
-            bg,
-            transparent
-        )
+        if parent_screen is None:
+            self.my_asciimatics_overlay_main_screen.print_at(
+                seperator.join(array),
+                posx,
+                posy,
+                colour,
+                attr,
+                bg,
+                transparent
+            )
+        else:
+            parent_screen.print_at(
+                seperator.join(array),
+                posx,
+                posy,
+                colour,
+                attr,
+                bg,
+                transparent
+            )
 
-    def print_array_colour(self, array: list[dict], seperator: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False) -> None:
+    def print_array_colour(self, array: list[dict], seperator: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False, parent_screen: SC = None) -> None:
         """ Display an array at a specific location with a specific colour """
+        display_function = None
+        if parent_screen is None:
+            display_function = self.my_asciimatics_overlay_main_screen.print_at
+        else:
+            display_function = parent_screen.print_at
         default_list = {
             "seperator": seperator,
             "posx": posx,
@@ -61,7 +96,7 @@ class Display:
                     item[key] = posx + index
                 if hasattr(item, key) is False:
                     item[key] = value
-            self.my_asciimatics_overlay_main_screen.print_at(
+            display_function(
                 item["text"],
                 item["posx"],
                 item["posy"],
@@ -71,13 +106,19 @@ class Display:
                 item["transparent"]
             )
 
-    def print_double_array(self, array: list[list], seperator: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False) -> None:
+    def print_double_array(self, array: list[list], seperator: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False, parent_screen: SC = None) -> None:
         """ Display a double array at a specific location with a specific colour """
+        display_function = None
+        if parent_screen is None:
+            display_function = self.my_asciimatics_overlay_main_screen.print_at
+        else:
+            display_function = parent_screen.print_at
+
         result = ""
         for i in array:
             result += seperator.join(i)
             result += "\n"
-        self.my_asciimatics_overlay_main_screen.print_at(
+        display_function(
             result,
             posx,
             posy,
@@ -87,7 +128,7 @@ class Display:
             transparent
         )
 
-    def print_double_array_colour(self, array: list[list[dict]], seperator: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False) -> None:
+    def print_double_array_colour(self, array: list[list[dict]], seperator: str, posx: int, posy: int, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False, parent_screen: SC = None) -> None:
         """ Display a double array at a specific location with a specific colour """
         for index, item in enumerate(array):
             self.print_array_colour(
@@ -98,11 +139,17 @@ class Display:
                 colour,
                 attr,
                 bg,
-                transparent
+                transparent,
+                parent_screen
             )
 
-    def print_array_cloud_points(self, array: list[dict], iposx: int = 0, iposy: int = 0, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False) -> None:
+    def print_array_cloud_points(self, array: list[dict], iposx: int = 0, iposy: int = 0, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False, parent_screen: SC = None) -> None:
         """ Display a double array at a specific location with a specific colour """
+        display_function = None
+        if parent_screen is None:
+            display_function = self.my_asciimatics_overlay_main_screen.print_at
+        else:
+            display_function = parent_screen.print_at
         new_posx = 0
         new_posy = 0
         new_character = ""
@@ -141,7 +188,7 @@ class Display:
                 new_transparent = character["transparent"]
             else:
                 new_transparent = transparent
-            self.my_asciimatics_overlay_main_screen.print_at(
+            display_function(
                 new_character,
                 new_posx,
                 new_posy,
@@ -151,8 +198,13 @@ class Display:
                 new_transparent
             )
 
-    def print_double_array_cloud_points(self, array: list[list[dict]], iposx: int = 0, iposy: int = 0, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False) -> None:
+    def print_double_array_cloud_points(self, array: list[list[dict]], iposx: int = 0, iposy: int = 0, colour: int = 7, attr: int = 0, bg: int = 0, transparent: bool = False, parent_screen: SC = None) -> None:
         """ Display a double array at a specific location with a specific colour """
+        display_function = None
+        if parent_screen is None:
+            display_function = self.my_asciimatics_overlay_main_screen.print_at
+        else:
+            display_function = parent_screen.print_at
         new_posx = 0
         new_posy = 0
         new_character = ""
@@ -190,7 +242,7 @@ class Display:
                     new_transparent = character["transparent"]
                 else:
                     new_transparent = transparent
-                self.my_asciimatics_overlay_main_screen.print_at(
+                display_function(
                     new_character,
                     new_posx,
                     new_posy,
@@ -199,3 +251,128 @@ class Display:
                     new_bg,
                     new_transparent
                 )
+
+    def _print_sides_of_checker_board(self, width: int, height: int, iposx: int = 0, iposy: int = 0, seperator_character_horizontal: str = "-", seperator_character_vertical: str = "|", fg: int = 7, bg: int = 6, transparent: bool = False, parent_screen: SC = None) -> None:
+        """ Print the borders (and characters) for the checker board """
+        alphabet = [
+            "A", "B", "C", "D", "E", "F",
+            "G", "H", "I", "J", "K",
+            "L", "M", "N", "O", "P",
+            "Q", "R", "S", "T", "U",
+            "V", "W", "X", "Y", "Z"
+        ]
+        alphabet_length = len(alphabet)-1
+        current_id = alphabet[0]
+        display_function = None
+        if parent_screen is None:
+            display_function = self.my_asciimatics_overlay_main_screen.print_at
+        else:
+            display_function = parent_screen.print_at
+        for i in range(width):
+            if i > alphabet_length:
+                current_id = i
+            else:
+                current_id = alphabet[i]
+            display_function(
+                current_id,
+                i+iposx,
+                iposy,
+                fg,
+                0,
+                bg,
+                transparent
+            )
+            display_function(
+                seperator_character_horizontal,
+                i+iposx,
+                iposy+height-1,
+                fg,
+                0,
+                bg,
+                transparent
+            )
+        for i in range(height):
+            display_function(
+                i,
+                iposx,
+                i+iposy,
+                fg,
+                0,
+                bg,
+                transparent
+            )
+            display_function(
+                seperator_character_vertical,
+                iposx+width-1,
+                i+iposy,
+                fg,
+                0,
+                bg,
+                transparent
+            )
+
+    def print_checker_board(self, data_array: list[list[str, int, float]], width: int = 30, height: int = 30, iposx: int = 0, iposy: int = 0, seperator_character_vertical: str = "|", seperator_character_horizontal: str = "-", even_bg_colour: int = 7, even_fg_colour: int = 6, uneven_bg_colour: int = 6, uneven_fg_colour: int = 7, border_fg: int = 7, border_bg: int = 6, transparent_even: bool = False, transparent_uneven: bool = False, border_transparent: bool = False, attr_even: int = 0, attr_uneven: int = 0, parent_screen: SC = None) -> None:
+        """ Display a checker board """
+        line = 0
+        character = 0
+        display_function = None
+        has_character = True
+        if len(data_array) > 0:
+            has_line = True
+        else:
+            has_character = False
+        current_display = ""
+        if parent_screen is None:
+            display_function = self.my_asciimatics_overlay_main_screen.print_at
+        else:
+            display_function = parent_screen.print_at
+        self._print_sides_of_checker_board(
+            width,
+            height,
+            iposx,
+            iposy,
+            seperator_character_horizontal,
+            seperator_character_vertical,
+            border_fg,
+            border_bg,
+            border_transparent,
+            parent_screen
+        )
+        border_width = 2
+        iposx += border_width
+        iposy += border_width
+        width -= border_width
+        height -= border_width
+        while line < height:
+            character = 0
+            if len(data_array[line]) == 0:
+                has_character = False
+            else:
+                has_character = True
+            while character < width:
+                if len(character) == 0 or has_character is False or has_line is False:
+                    current_display = " "
+                else:
+                    current_display = data_array[line][character][0]
+                if character % 2 == 0:
+                    display_function(
+                        current_display,
+                        line*width+iposx,
+                        character*height+iposy,
+                        even_fg_colour,
+                        attr_even,
+                        even_bg_colour,
+                        transparent_even
+                    )
+                else:
+                    display_function(
+                        current_display,
+                        line*width+iposx,
+                        character*height+iposy,
+                        uneven_fg_colour,
+                        attr_uneven,
+                        uneven_bg_colour,
+                        transparent_uneven
+                    )
+                    character += 1
+            line += 1

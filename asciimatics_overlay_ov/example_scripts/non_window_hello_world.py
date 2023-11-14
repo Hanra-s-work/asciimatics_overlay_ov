@@ -1,17 +1,13 @@
 """
 File in charge of acting as the main script of the library when it is called as a standalone
 """
-import widgets as WI
-from functools import partial
 from random import randint
 from time import sleep
 import asciimatics.widgets as WIG
 from asciimatics.event import Event
-from asciimatics.screen import Screen
 from asciimatics.exceptions import NextScene
-from asciimatics_overlay_ov import AsciimaticsOverlay
 from asciimatics_overlay_ov import AsciiMaticsOverlayMain
-from .frame_nodes import FrameNodes
+from asciimatics_overlay_ov.widgets import FrameNodes
 
 
 class NonWindowHelloWorld(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
@@ -23,10 +19,9 @@ class NonWindowHelloWorld(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
             screen.height,
             screen.width,
             has_border=True,
-            title="Input Field"
+            title="TTY Hello World"
         )
         self.frame_node = FrameNodes()
-        self.asciimatics_overlay = AsciiMaticsOverlayMain(Event, screen)
         self.quotes = [
             "Carpe Diem",
             "Think big",
@@ -58,7 +53,7 @@ class NonWindowHelloWorld(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
             "Smile, be happy"
         ]
         self.event = Event()
-        self.amom = AsciimaticsOverlay(self.event, screen)
+        self.amom = AsciiMaticsOverlayMain(self.event, screen)
         self.amom.update_initial_pointers(self.event, screen)
         self.main_loop = True
         self.colour_data = self._get_colour_data()

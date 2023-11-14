@@ -6,10 +6,10 @@ File in charge of containing a few demo functions for the asciimatics library
 from asciimatics.event import Event
 import asciimatics.widgets as WIG
 from asciimatics.scene import Scene
-from asciimatics.screen import Screen  # , Colour
+from asciimatics.screen import Screen
 from asciimatics.exceptions import ResizeScreenError, NextScene, StopApplication
 from asciimatics_overlay_ov import AsciiMaticsOverlayMain
-from .frame_nodes import FrameNodes
+from asciimatics_overlay_ov.widgets import FrameNodes
 from .hello_world import HelloWorld
 from .inut_field import InputField
 from .list_fields import ListFields
@@ -18,6 +18,8 @@ from .radiobuttons import Radiobuttons
 from .date_and_time_picker import DateAndTime
 from .file_browser import FileBrowser
 from .non_window_hello_world import NonWindowHelloWorld
+from .popup import Popup
+from .chess_test import ChessTest
 
 
 class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
@@ -114,6 +116,22 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
         )
         self.layout.add_widget(
             self.add_button(
+                text="Test popup",
+                on_click=self._test_popup,
+                name=None
+            ),
+            0
+        )
+        self.layout.add_widget(
+            self.add_button(
+                text="Test chess",
+                on_click=self._test_chess,
+                name=None
+            ),
+            0
+        )
+        self.layout.add_widget(
+            self.add_button(
                 text="Quit",
                 on_click=self._quit,
                 name=None
@@ -145,6 +163,12 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
     def _test_non_windows_hello_world(self) -> None:
         raise NextScene("NonWindowHelloWorld")
 
+    def _test_popup(self) -> None:
+        raise NextScene("Popup")
+
+    def _test_chess(self) -> None:
+        raise NextScene("ChessTest")
+
     def _quit(self) -> None:
         raise StopApplication("User pressed quit")
 
@@ -169,8 +193,10 @@ class Main:
             Scene([Radiobuttons(screen)], -1, name="Radiobuttons"),
             Scene([DateAndTime(screen)], -1, name="DateAndTime"),
             Scene([FileBrowser(screen)], -1, name="FileBrowser"),
-            Scene([NonWindowHelloWorld(screen)], -
-                  1, name="NonWindowHelloWorld")
+            Scene([NonWindowHelloWorld(screen)],
+                  (-1), name="NonWindowHelloWorld"),
+            Scene([Popup(screen)], -1, name="Popup"),
+            Scene([ChessTest(screen)], -1, name="ChessTest")
         ]
         return scenes
 

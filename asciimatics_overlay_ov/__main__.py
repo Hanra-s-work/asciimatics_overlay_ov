@@ -6,7 +6,7 @@ from random import randint
 from asciimatics.event import Event
 from asciimatics.screen import Screen
 from asciimatics_overlay_ov import AsciimaticsOverlay
-import widgets as WI
+import example_scripts as ES
 
 
 print("Hello world")
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     ERROR = 1
     SCREEN = None
     LAST_SCENE = None
-    WII = WI.Main(
+    WII = ES.Main(
         success=SUCCESS,
         error=ERROR,
         screen=SCREEN,
