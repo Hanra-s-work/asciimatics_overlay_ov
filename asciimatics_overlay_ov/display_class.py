@@ -252,8 +252,9 @@ class Display:
                     new_transparent
                 )
 
-    def _print_sides_of_checker_board(self, width: int, height: int, iposx: int = 0, iposy: int = 0, seperator_character_horizontal: str = "-", seperator_character_vertical: str = "|", fg: int = 7, bg: int = 6, transparent: bool = False, parent_screen: SC = None) -> None:
+    def _print_sides_of_checker_board(self, width: int, height: int, iposx: int = 0, iposy: int = 0, seperator_character_horizontal: str = "-", seperator_character_vertical: str = "|", fg: int = 7, bg: int = 6, transparent: bool = False, add_spacing: bool = True, parent_screen: SC = None) -> None:
         """ Print the borders (and characters) for the checker board """
+        print(f"In _print_sides_of_checker_board")
         alphabet = [
             "A", "B", "C", "D", "E", "F",
             "G", "H", "I", "J", "K",
@@ -264,15 +265,26 @@ class Display:
         alphabet_length = len(alphabet)-1
         current_id = alphabet[0]
         display_function = None
+        print(
+            f"alphabet = {alphabet}, alphabet_length = {alphabet_length}"
+        )
+        print(
+            f"current_id = {current_id}, display_function = {display_function}"
+        )
         if parent_screen is None:
             display_function = self.my_asciimatics_overlay_main_screen.print_at
         else:
             display_function = parent_screen.print_at
-        for i in range(width):
+        x_offset = (len(str(width))+1)
+        if add_spacing is True:
+            x_offset *= 2
+        for i in range(x_offset, (width+x_offset)):
+            print(
+                f"i = {i}, width = {width}, alphabet_length = {alphabet_length}")
             if i > alphabet_length:
-                current_id = i
+                current_id = str(i-x_offset)[1:]
             else:
-                current_id = alphabet[i]
+                current_id = alphabet[i-x_offset]
             display_function(
                 current_id,
                 i+iposx,
@@ -285,15 +297,38 @@ class Display:
             display_function(
                 seperator_character_horizontal,
                 i+iposx,
-                iposy+height-1,
+                iposy+1,
                 fg,
                 0,
                 bg,
                 transparent
             )
-        for i in range(height):
+            if add_spacing is True:
+                display_function(
+                    " ",
+                    i+iposx,
+                    iposy,
+                    fg,
+                    0,
+                    bg,
+                    transparent
+                )
+                display_function(
+                    seperator_character_horizontal,
+                    i+iposx,
+                    iposy+1,
+                    fg,
+                    0,
+                    bg,
+                    transparent
+                )
+                i += 1
+
+        y_offset = len(str(height))+1
+        for i in range(y_offset, (height+y_offset)):
+            print(f"i = {i}, height = {height}")
             display_function(
-                i,
+                i-y_offset,
                 iposx,
                 i+iposy,
                 fg,
@@ -303,15 +338,16 @@ class Display:
             )
             display_function(
                 seperator_character_vertical,
-                iposx+width-1,
+                iposx+1,
                 i+iposy,
                 fg,
                 0,
                 bg,
                 transparent
             )
+        print("Out of _print_sides_of_checker_board")
 
-    def print_checker_board(self, data_array: list[list[str, int, float]], width: int = 30, height: int = 30, iposx: int = 0, iposy: int = 0, seperator_character_vertical: str = "|", seperator_character_horizontal: str = "-", even_bg_colour: int = 7, even_fg_colour: int = 6, uneven_bg_colour: int = 6, uneven_fg_colour: int = 7, border_fg: int = 7, border_bg: int = 6, transparent_even: bool = False, transparent_uneven: bool = False, border_transparent: bool = False, attr_even: int = 0, attr_uneven: int = 0, parent_screen: SC = None) -> None:
+    def print_checker_board(self, data_array: list[list[str, int, float]], width: int = 30, height: int = 30, iposx: int = 0, iposy: int = 0, seperator_character_vertical: str = "|", seperator_character_horizontal: str = "-", even_bg_colour: int = 7, even_fg_colour: int = 6, uneven_bg_colour: int = 6, uneven_fg_colour: int = 7, border_fg: int = 7, border_bg: int = 6, transparent_even: bool = False, transparent_uneven: bool = False, border_transparent: bool = False, attr_even: int = 0, attr_uneven: int = 0, add_spacing: bool = True, parent_screen: SC = None) -> None:
         """ Display a checker board """
         line = 0
         character = 0
@@ -320,12 +356,14 @@ class Display:
         if len(data_array) > 0:
             has_line = True
         else:
-            has_character = False
+            has_line = False
+        print(f"has_line = {has_line}, has_character = {has_character}")
         current_display = ""
         if parent_screen is None:
             display_function = self.my_asciimatics_overlay_main_screen.print_at
         else:
             display_function = parent_screen.print_at
+        print(f"parent_screen = {parent_screen}")
         self._print_sides_of_checker_board(
             width,
             height,
@@ -336,24 +374,33 @@ class Display:
             border_fg,
             border_bg,
             border_transparent,
+            add_spacing,
             parent_screen
         )
-        border_width = 2
+        border_width = len(str(width))+1
         iposx += border_width
-        iposy += border_width
         width -= border_width
+        iposy += border_width
         height -= border_width
+        line = 0
+        character = 0
+        print(f"border_width = {border_width}, iposx = {iposx}")
+        print(f"iposy = {iposy}, width = {width}, height = {height}")
         while line < height:
             character = 0
-            if len(data_array[line]) == 0:
+            if has_line is True and len(data_array[line]) == 0:
                 has_character = False
             else:
                 has_character = True
+            print(
+                f"line = {line}, character = {character}, height = {height}, has_character = {has_character}")
             while character < width:
-                if len(character) == 0 or has_character is False or has_line is False:
-                    current_display = " "
+                if has_character is False or has_line is False or len(current_display[line]) == 0:
+                    current_display = "."
                 else:
                     current_display = data_array[line][character][0]
+                print(
+                    f"line = {line}, character = {character}, height = {height}, has_character = {has_character}")
                 if character % 2 == 0:
                     display_function(
                         current_display,
@@ -374,5 +421,5 @@ class Display:
                         uneven_bg_colour,
                         transparent_uneven
                     )
-                    character += 1
+                character += 1
             line += 1

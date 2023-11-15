@@ -17,8 +17,8 @@ class ChessTest(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
     def __init__(self, screen):
         super(ChessTest, self).__init__(
             screen,
-            screen.height,
-            screen.width,
+            screen.height//2,
+            screen.width//2,
             has_border=True,
             title="Chess Test"
         )
@@ -26,7 +26,6 @@ class ChessTest(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
         self.event = Event()
         self.asciimatics_overlay = AsciiMaticsOverlayMain(self.event, screen)
         self.asciimatics_overlay.update_initial_pointers(self.event, screen)
-        # Define a layout with three columns
         self.layout = WIG.Layout([100], fill_frame=True)
         self.add_layout(self.layout)
         self.place_content_on_screen()
@@ -62,17 +61,7 @@ class ChessTest(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
 
     def _draw_chess(self) -> None:
         """ Draw a chess board """
-        self.asciimatics_overlay.mvprintw_colour(
-            text="jfdjioqdsjqosjdioqsdiqsjdiqsjdqdqsjdqsodjqjsoidqsdqsd",
-            posx=5,
-            posy=5,
-            colour=7,
-            attr=0,
-            bg=0,
-            transparent=False,
-            parent_screen=None
-        )
-        sleep(4)
+        self.asciimatics_overlay.clear_screen()
         self.asciimatics_overlay.print_checker_board(
             data_array=[],
             width=64,
@@ -81,10 +70,10 @@ class ChessTest(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
             iposy=1,
             seperator_character_vertical="|",
             seperator_character_horizontal="-",
-            even_bg_colour=self.asciimatics_overlay.colour_cyan,
-            even_fg_colour=self.asciimatics_overlay.colour_black,
+            even_bg_colour=self.asciimatics_overlay.colour_magenta,
+            even_fg_colour=self.asciimatics_overlay.colour_cyan,
             uneven_bg_colour=self.asciimatics_overlay.colour_green,
-            uneven_fg_colour=self.asciimatics_overlay.colour_black,
+            uneven_fg_colour=self.asciimatics_overlay.colour_cyan,
             border_fg=self.asciimatics_overlay.colour_yellow,
             border_bg=self.asciimatics_overlay.colour_black,
             transparent_even=False,
@@ -92,8 +81,10 @@ class ChessTest(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
             border_transparent=False,
             attr_even=0,
             attr_uneven=0,
+            add_spacing=True,
             parent_screen=None
         )
+        # self._exit("Main")
 
     def _exit(self):
         raise NextScene("Main")
