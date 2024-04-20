@@ -8,7 +8,7 @@ class Colour:
 
     your_selected_colour = 0
 
-    def __init__(self, colour_name: str = None) -> None or int:
+    def __init__(self, colour_name: str = None) -> None | int:
         self.windows_bind = dict()
         self.linux_bind = dict()
         self.human_bind = dict()

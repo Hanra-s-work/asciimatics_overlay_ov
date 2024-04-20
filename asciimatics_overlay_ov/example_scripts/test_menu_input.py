@@ -20,6 +20,7 @@ from .file_browser import FileBrowser
 from .non_window_hello_world import NonWindowHelloWorld
 from .popup import Popup
 from .chess_test import ChessTest
+from .close_without_raising import CloseWithoutRaising
 
 
 class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
@@ -132,6 +133,22 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
         )
         self.layout.add_widget(
             self.add_button(
+                text="Close without raising",
+                on_click=self._close_without_raising,
+                name=None
+            ),
+            0
+        )
+        self.layout.add_widget(
+            self.add_button(
+                text="Stop application (gets applied to this window)",
+                on_click=self._quit,
+                name=None
+            ),
+            0
+        )
+        self.layout.add_widget(
+            self.add_button(
                 text="Quit",
                 on_click=self._quit,
                 name=None
@@ -169,6 +186,12 @@ class MainMenu(WIG.Frame, AsciiMaticsOverlayMain, FrameNodes):
     def _test_chess(self) -> None:
         raise NextScene("ChessTest")
 
+    def _stop_application(self) -> None:
+        self.screen.close()
+
+    def _close_without_raising(self) -> None:
+        raise NextScene("CloseWithoutRaising")
+
     def _quit(self) -> None:
         raise StopApplication("User pressed quit")
 
@@ -196,7 +219,9 @@ class Main:
             Scene([NonWindowHelloWorld(screen)],
                   (-1), name="NonWindowHelloWorld"),
             Scene([Popup(screen)], -1, name="Popup"),
-            Scene([ChessTest(screen)], -1, name="ChessTest")
+            Scene([ChessTest(screen)], -1, name="ChessTest"),
+            Scene([CloseWithoutRaising(screen)], -
+                  1, name="CloseWithoutRaising")
         ]
         return scenes
 

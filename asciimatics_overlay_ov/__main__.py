@@ -6,7 +6,7 @@ from random import randint
 from asciimatics.event import Event
 from asciimatics.screen import Screen
 from asciimatics_overlay_ov import AsciimaticsOverlay
-import example_scripts as ES
+import asciimatics_overlay_ov.example_scripts as ES
 
 
 print("Hello world")

@@ -38,7 +38,7 @@ class Is:
         else:
             return False
 
-    def is_it_this_mouse_button(self, button: int):
+    def is_it_this_mouse_button(self, button: int) -> bool:
         """
         Check if a specific mouse button is currently pressed in an asciimatics application.
 

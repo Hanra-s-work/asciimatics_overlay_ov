@@ -442,7 +442,7 @@ class FrameNodes:
     def _tmp(self) -> None:
         print(dir(WIG))
 
-    def get_text_input(self, text_box: object) -> str or int:
+    def get_text_input(self, text_box: object) -> str | int:
         """
         Get the text from a text box
         :param text_box: The text box to get the text from
@@ -463,7 +463,7 @@ class FrameNodes:
         )
         return self.error
 
-    def get_widget_value(self, widget: object) -> str or int:
+    def get_widget_value(self, widget: object) -> str | int:
         """
         Get the value from a widget
         :param widget: The widget to get the value from
@@ -481,7 +481,7 @@ class FrameNodes:
         )
         return self.error
 
-    def get_widget_value_by_name(self, your_self: Frame, widget_name: str) -> str or int:
+    def get_widget_value_by_name(self, your_self: Frame, widget_name: str) -> str | int:
         """
         Get the value of a widget
         :param widget_name: The name of the widget to get the value from
