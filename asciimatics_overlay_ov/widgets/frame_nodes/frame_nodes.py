@@ -8,7 +8,9 @@ from asciimatics_overlay_ov.colour_class import Colour
 
 
 class FrameNodes:
-    """ The class in charge of containing functions that will ease the implementation process """
+    """
+    The class in charge of containing functions that will ease the implementation process
+    """
 
     def __init__(self, success: int = 0, error: int = 84) -> None:
         self.label_left = "<"
