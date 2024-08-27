@@ -12,11 +12,11 @@ class FrameNodes:
     """
 
     def __init__(self, success: int = 0, error: int = 84) -> None:
-        self.label_left = "<"
-        self.label_right = ">"
-        self.label_center = "^"
-        self.success = success
-        self.error = error
+        self.label_left: str = "<"
+        self.label_right: str = ">"
+        self.label_center: str = "^"
+        self.success: int = success
+        self.error: int = error
 
     def add_listbox(self, input_data: list[tuple[str, int]], on_change: object, on_select: object, height: int = WIG.Widget.FILL_FRAME, name: str = "my_listbox", center: bool = False, scrollbar: bool = True, label: str = None) -> WIG.ListBox:
         """

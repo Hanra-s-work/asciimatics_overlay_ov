@@ -10,7 +10,7 @@ class Is:
     """ The class in charge of asserting states """
 
     def __init__(self, event: Event = None) -> None:
-        self.my_asciimatics_overlay_main_event = event
+        self.my_asciimatics_overlay_main_event: Event = event
 
     def is_key_pressed(self) -> bool:
         """ Check if a key is pressed """
@@ -37,8 +37,7 @@ class Is:
         # Check if any mouse button is pressed
         if (self.my_asciimatics_overlay_main_event.buttons & left_button_mask) or (self.my_asciimatics_overlay_main_event.buttons & middle_button_mask) or (self.my_asciimatics_overlay_main_event.buttons & right_button_mask):
             return True
-        else:
-            return False
+        return False
 
     def is_it_this_mouse_button(self, button: int) -> bool:
         """
@@ -57,5 +56,4 @@ class Is:
         # Check if the event is a mouse event and the specified button is pressed
         if isinstance(mouse_event, self.my_asciimatics_overlay_main_event) and 1 <= button <= 3:
             return mouse_event.buttons & (1 << (button - 1)) != 0
-
         return False

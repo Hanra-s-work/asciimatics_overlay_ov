@@ -20,12 +20,12 @@ class TestAsciimaticsOverlay(AsciimaticsOverlay):
         self.success = 0
         self.error = 84
         # ---- class attributes ----
-        self.screen = SCR.Screen
-        self.event = EVE.Event
+        self.screen: SCR.Screen = None
+        self.event: EVE.Event = None
         # ---- class inheritance ----
         super(AsciimaticsOverlay, self).__init__(
-            self.screen,
-            self.event
+            self.event,
+            self.screen
         )
 
     def initialise_window(self) -> int:

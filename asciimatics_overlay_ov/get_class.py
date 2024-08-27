@@ -11,8 +11,8 @@ class Get:
     """ The class in charge of getting elements """
 
     def __init__(self, event: EV, screen: SC) -> None:
-        self.my_asciimatics_overlay_main_event = event
-        self.my_asciimatics_overlay_main_screen = screen
+        self.my_asciimatics_overlay_main_event: EV = event
+        self.my_asciimatics_overlay_main_screen: SC = screen
 
     def get_event(self) -> EV:
         """ Get the event """

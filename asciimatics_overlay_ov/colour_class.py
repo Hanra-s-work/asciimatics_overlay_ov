@@ -9,22 +9,22 @@ class Colour:
     your_selected_colour = 0
 
     def __init__(self, colour_name: str = None) -> None:
-        self.windows_bind = {}
-        self.linux_bind = {}
-        self.human_bind = {}
-        self.colour_default = -1
-        self.colour_black = 0
-        self.colour_red = 1
-        self.colour_green = 2
-        self.colour_yellow = 3
-        self.colour_blue = 4
-        self.colour_magenta = 5
-        self.colour_cyan = 6
-        self.colour_white = 7
+        self.windows_bind: dict = {}
+        self.linux_bind: dict = {}
+        self.human_bind: dict = {}
+        self.colour_default: int = -1
+        self.colour_black: int = 0
+        self.colour_red: int = 1
+        self.colour_green: int = 2
+        self.colour_yellow: int = 3
+        self.colour_blue: int = 4
+        self.colour_magenta: int = 5
+        self.colour_cyan: int = 6
+        self.colour_white: int = 7
         self._create_windows_bind()
         self._create_linux_bind()
         self._create_human_bind()
-        self.your_selected_colour = -1
+        self.your_selected_colour: int = -1
         if colour_name is not None:
             self.your_selected_colour = self.pick_colour(colour_name)
 

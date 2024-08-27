@@ -2,11 +2,6 @@
 File in charge of acting as the main script of the library when it is called as a standalone
 """
 import sys
-from time import sleep
-from random import randint
-from asciimatics.event import Event
-from asciimatics.screen import Screen
-from asciimatics_overlay_ov import AsciimaticsOverlay
 import asciimatics_overlay_ov.example_scripts as ES
 
 

@@ -16,26 +16,34 @@ class AsciiMaticsOverlayMain(Is, MyScreen, Get, Display, Colour, FrameNodes):
     """ The class in charge of simplifying the usage of some functionalities from asciimatics """
 
     def __init__(self, event: Event = None, screen: SC = None, success: int = 0, error: int = 84) -> None:
-        self.success = success
-        self.error = error
+        self.success: int = success
+        self.error: int = error
         if event is None or screen is None:
             return
-        self.__version__ = '1.0.0'
+        self.__version__: str = '1.0.0'
         # ---- Basic input ----
-        self.my_asciimatics_overlay_main_event = event
-        self.my_asciimatics_overlay_main_screen = screen
+        self.my_asciimatics_overlay_main_event: Event = event
+        self.my_asciimatics_overlay_main_screen: SC = screen
         # ---- Initialise the inherited classes ----
-        super(Is, self).__init__(self.my_asciimatics_overlay_main_event)
-        super(MyScreen, self).__init__(
+        Is.__init__(self, self.my_asciimatics_overlay_main_event)
+        MyScreen.__init__(
+            self,
+            self.my_asciimatics_overlay_main_screen,
+            self.success,
+            self.error
+        )
+        Get.__init__(
+            self,
             self.my_asciimatics_overlay_main_event,
             self.my_asciimatics_overlay_main_screen
         )
-        super(Get, self).__init__(self.my_asciimatics_overlay_main_screen)
-        super(Colour, self).__init__()
-        super(Display, self).__init__()
-        super(FrameNodes, self).__init__()
+        Colour.__init__(self)
+        Display.__init__(self, self.my_asciimatics_overlay_main_screen)
+        FrameNodes.__init__(self)
         # ---- Initialise the node classes version ----
-        self.is_ = Is(self.my_asciimatics_overlay_main_event)
+        self.is_ = Is(
+            self.my_asciimatics_overlay_main_event
+        )
         self.screen_ = MyScreen(
             self.my_asciimatics_overlay_main_screen,
             self.success,
@@ -45,8 +53,8 @@ class AsciiMaticsOverlayMain(Is, MyScreen, Get, Display, Colour, FrameNodes):
             self.my_asciimatics_overlay_main_event,
             self.my_asciimatics_overlay_main_screen
         )
-        self.display_ = Display(self.my_asciimatics_overlay_main_screen)
         self.colour_ = Colour()
+        self.display_ = Display(self.my_asciimatics_overlay_main_screen)
         self.frame_nodes_ = FrameNodes(self.success, self.error)
 
     def update_initial_pointers(self, event: Event = None, screen: SC = None, success: int = None, error: int = None) -> int:
@@ -77,11 +85,11 @@ class AsciiMaticsOverlayMain(Is, MyScreen, Get, Display, Colour, FrameNodes):
             self.error = error
             self.screen_.error = error
             self.frame_nodes_.error = error
-        return 0
+        return self.success
 
     def update_event_pointer(self, event: Event) -> int:
         """ Update the event pointer """
         self.my_asciimatics_overlay_main_event = event
         self.is_.my_asciimatics_overlay_main_event = self.my_asciimatics_overlay_main_event
         self.get_.my_asciimatics_overlay_main_event = self.my_asciimatics_overlay_main_event
-        return 0
+        return self.success

@@ -9,7 +9,7 @@ class Display:
     """ Class in charge of displaying content on the screen """
 
     def __init__(self, screen: SC) -> None:
-        self.my_asciimatics_overlay_main_screen = screen
+        self.my_asciimatics_overlay_main_screen: SC = screen
 
     def mvprintw(self, text: str, posx: int, posy: int, width: int = 0, parent_screen: SC = None) -> None:
         """ Display a string at a specific location """
