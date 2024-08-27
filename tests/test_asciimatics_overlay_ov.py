@@ -20,10 +20,10 @@ class TestAsciimaticsOverlay(AsciimaticsOverlay):
         self.success = 0
         self.error = 84
         # ---- class attributes ----
-        self.screen: SCR.Screen = None
-        self.event: EVE.Event = None
+        self.screen: SCR.Screen = SCR.Screen
+        self.event: EVE.Event = EVE.Event
         # ---- class inheritance ----
-        super(AsciimaticsOverlay, self).__init__(
+        super().__init__(
             self.event,
             self.screen
         )
@@ -577,11 +577,10 @@ def test_get_event_key_code() -> None:
     """ Test the function to get event type """
     status1 = TAOI.initialise_window()
     status2 = TAOI.error
-    try:
-        TAOI.get_event_key_code()
+    data = TAOI.get_event_key_code()
+    if data is not None:
         status2 = TAOI.success
-    except Exception as err:
-        print(f"Error = {err}")
+    else:
         status2 = TAOI.error
     status3 = TAOI.de_initialise_window()
     assert status1 == TAOI.success
