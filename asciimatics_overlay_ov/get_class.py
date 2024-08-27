@@ -2,6 +2,7 @@
 File in charge of containing the actions that are used for gathering information withing the running program
 """
 
+from typing import Union
 from asciimatics.event import Event as EV
 from asciimatics.screen import Screen as SC
 
@@ -82,7 +83,7 @@ class Get:
         """ Get the event type """
         return self.my_asciimatics_overlay_main_event.type
 
-    def get_event_key_code(self) -> int or None:
+    def get_event_key_code(self) -> Union[int, None]:
         """ Get the event key code """
         return self.my_asciimatics_overlay_main_screen.get_key()
 

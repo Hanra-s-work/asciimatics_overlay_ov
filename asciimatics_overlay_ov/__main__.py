@@ -1,6 +1,7 @@
 """
 File in charge of acting as the main script of the library when it is called as a standalone
 """
+import sys
 from time import sleep
 from random import randint
 from asciimatics.event import Event
@@ -26,4 +27,4 @@ if __name__ == "__main__":
         STATUS = WII.run()
     except Exception as err:
         print(f"Error: {err}")
-        exit(ERROR)
+        sys.exit(ERROR)

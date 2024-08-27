@@ -9,9 +9,9 @@ class Colour:
     your_selected_colour = 0
 
     def __init__(self, colour_name: str = None) -> None:
-        self.windows_bind = dict()
-        self.linux_bind = dict()
-        self.human_bind = dict()
+        self.windows_bind = {}
+        self.linux_bind = {}
+        self.human_bind = {}
         self.colour_default = -1
         self.colour_black = 0
         self.colour_red = 1

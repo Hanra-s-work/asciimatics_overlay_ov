@@ -7,7 +7,7 @@ from asciimatics_overlay_ov.colour_class import Colour
 
 
 class MyScreen:
-    """ The class in wharge of containing the binders for the Screen insterractions """
+    """ The class in charge of containing the binders for the Screen insterractions """
 
     def __init__(self, screen: SC = None, success: int = 0, error: int = 84) -> None:
         self.success = success

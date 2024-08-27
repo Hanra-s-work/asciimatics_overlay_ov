@@ -54,14 +54,14 @@ class AsciiMaticsOverlayMain(Is, MyScreen, Get, Display, Colour, FrameNodes):
         if event is None and self.my_asciimatics_overlay_main_event is not None:
             event = self.my_asciimatics_overlay_main_event
         elif self.my_asciimatics_overlay_main_event is None:
-            raise Exception(
+            raise RuntimeError(
                 "my_asciimatics_overlay_main_event or event must contain an instance of the Event class."
             )
 
         if screen is None:
             screen = self.my_asciimatics_overlay_main_screen
         elif self.my_asciimatics_overlay_main_screen is None:
-            raise Exception(
+            raise RuntimeError(
                 "my_asciimatics_overlay_main_screen or screen must contain an instance of the Screen class."
             )
         self.my_asciimatics_overlay_main_event = event

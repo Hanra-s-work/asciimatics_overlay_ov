@@ -1,5 +1,4 @@
 # tests/test_ask_question.py
-import unittest.mock
 from sys import stderr
 import asciimatics.screen as SCR
 import asciimatics.event as EVE

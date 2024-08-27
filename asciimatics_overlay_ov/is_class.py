@@ -1,6 +1,8 @@
 """
 The file in charge of groupping the is functions in charge of asserting states
 """
+
+from typing import Union
 from asciimatics.event import Event
 
 
@@ -16,7 +18,7 @@ class Is:
             return True
         return False
 
-    def is_it_this_key(self, input_key: int, wanted_key: str or int) -> bool:
+    def is_it_this_key(self, input_key: int, wanted_key: Union[str, int]) -> bool:
         """ Check if the key pressed is the one passed as parameter """
         if isinstance(wanted_key, int) is True:
             if input_key == wanted_key:
@@ -27,7 +29,7 @@ class Is:
         return False
 
     def is_mouse_button_pressed(self) -> bool:
-        # Define the button_mask for each mouse button (left, middle, right)
+        """ Define the button_mask for each mouse button (left, middle, right) """
         left_button_mask = 1
         middle_button_mask = 2
         right_button_mask = 4

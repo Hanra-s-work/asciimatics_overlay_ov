@@ -1,0 +1,8 @@
+asciimatics ==1.15.0
+english-words == 2.0.1
+python-magic == 0.4.27
+setuptools >= 46.4.0
+wheel >= 0.36.2
+pep517 >= 0.11.0
+build == 1.2.1
+pytest == 8.3.2

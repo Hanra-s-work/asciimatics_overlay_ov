@@ -4,7 +4,6 @@ import asciimatics.widgets as WIG
 from asciimatics.screen import Screen
 from asciimatics.scene import Scene
 from asciimatics.widgets import Frame
-from asciimatics_overlay_ov.colour_class import Colour
 
 
 class FrameNodes:

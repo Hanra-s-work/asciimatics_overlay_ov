@@ -254,7 +254,7 @@ class Display:
 
     def _print_sides_of_checker_board(self, width: int, height: int, iposx: int = 0, iposy: int = 0, seperator_character_horizontal: str = "-", seperator_character_vertical: str = "|", fg: int = 7, bg: int = 6, transparent: bool = False, add_spacing: bool = True, parent_screen: SC = None) -> None:
         """ Print the borders (and characters) for the checker board """
-        print(f"In _print_sides_of_checker_board")
+        print("In _print_sides_of_checker_board")
         alphabet = [
             "A", "B", "C", "D", "E", "F",
             "G", "H", "I", "J", "K",
