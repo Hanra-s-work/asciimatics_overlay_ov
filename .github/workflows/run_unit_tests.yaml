@@ -20,7 +20,7 @@ env:
   IS_RELEASE: is_release.txt
   MATRIX_VERSION_PUBLISHING: "3.10"
   MAX_TAG_AGE: "1 hour"
-  SOURCE_CODE_PATH: hl_hello_world/hl_hello_world.py
+  SOURCE_CODE_PATH: asciimatics_overlay_ov/asciimatics_overlay_main.py
 
 jobs:
 
