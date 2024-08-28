@@ -196,7 +196,7 @@ jobs:
     - name: Test with pytest
       run: |
         cd ${{env.CWD}}
-        docker run -it -e DEBIAN_FRONTEND=noninteractive -v "$(pwd)":"/home" ubuntu /bin/bash -c "
+        docker run -t -e DEBIAN_FRONTEND=noninteractive -v "$(pwd)":"/home" ubuntu /bin/bash -c "
           echo 'Upating ubuntu version' && \
           apt update && apt upgrade -y && \
           echo 'Installing required dependencies' && \
