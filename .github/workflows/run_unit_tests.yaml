@@ -162,6 +162,11 @@ jobs:
         if [ ${#first_requirements} -gt 0 ]; then pip install -r $first_requirements; fi
         deactivate
 
+    - name: Move le environement out of the build folder
+      run: |
+          cd ${{env.CWD}}
+          mv lenv ../lenv
+
     - name: Lint with flake8
       run: |
         cd ${{env.CWD}}
@@ -176,15 +181,21 @@ jobs:
         latest_tag="$(cat ${{env.TAG_FILE}})"
         if [ -f ${{env.SETUP_FILE}} ]
         then
-          echo "Updating version in ${{env.SETUP_FILE}}"
-          echo -e "\n\n\n\n\n\n\n\n\n"
-          echo "Tag: $latest_tag"
-          latest_tag=${latest_tag/"v"/""}
-          echo "Tag: $latest_tag"
-          sed -i "s/version='.*'/version='$latest_tag'/g" ${{env.SETUP_FILE}}
+        echo "Updating version in ${{env.SETUP_FILE}}"
+        echo -e "\n\n\n\n\n\n\n\n\n"
+        echo "Tag: $latest_tag"
+        latest_tag=${latest_tag/"v"/""}
+        echo "Tag: $latest_tag"
+        sed -i "s/version='.*'/version='$latest_tag'/g" ${{env.SETUP_FILE}}
         fi
         pip install build
         python -m build
+
+
+    - name: Move le environement out of the build folder
+      run: |
+        cd ${{env.CWD}}
+        mv ../lenv ./lenv
     
     - name: Installing the package
       run: |
