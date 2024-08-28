@@ -146,8 +146,8 @@ jobs:
     - name: Install xvfb
       run: sudo apt-get install xvfb
 
-    - name: install venv
-      run: sudo apt-get install python${{matrix.python-version}}-venv python${{matrix.python-version}}-venv -y
+    # - name: install venv
+    #   run: sudo apt-get install python${{matrix.python-version}}-venv -y
     
     - name: Install dependencies
       run: |
