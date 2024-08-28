@@ -216,5 +216,15 @@ jobs:
     - name: Test with pytest
       run: |
         cd ${{env.CWD}}
-        docker run -t -v "$(pwd)":"/home" ubuntu /bin/bash -c "apt update -y ; apt upgrade -y ; apt install xvfb python${{matrix.python-version}} python${{matrix.python-version}}-venv python${{matrix.python-version}}-pip ; cd /home ; . ./lenv/bin/activate ; xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' pytest -s ; deactivate"
+        docker run -t -v "$(pwd)":"/home" ubuntu /bin/bash -c "
+          apt update ; apt upgrade -y && \
+          apt install -y xvfb software-properties-common && \
+          add-apt-repository -y ppa:deadsnakes/ppa && \
+          apt-get update && \
+          apt install -y python${{matrix.python-version}} python${{matrix.python-version}}-venv python${{matrix.python-version}}-dev && \
+          cd /home && \
+          . ./lenv/bin/activate && \
+          xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' pytest -s && \
+          deactivate
+        "
         # xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" pytest -s
