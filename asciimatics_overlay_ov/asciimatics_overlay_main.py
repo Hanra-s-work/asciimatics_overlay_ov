@@ -13,7 +13,9 @@ from .widgets import FrameNodes
 
 
 class AsciiMaticsOverlayMain(Is, MyScreen, Get, Display, Colour, FrameNodes):
-    """ The class in charge of simplifying the usage of some functionalities from asciimatics """
+    """
+    The class in charge of simplifying the usage of some functionalities from asciimatics
+    """
 
     def __init__(self, event: Event = None, screen: SC = None, success: int = 0, error: int = 84) -> None:
         self.success: int = success
