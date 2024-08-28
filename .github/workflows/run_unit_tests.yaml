@@ -224,7 +224,7 @@ jobs:
           apt install -y python${{matrix.python-version}} python${{matrix.python-version}}-venv python3-pip python${{matrix.python-version}}-dev && \
           cd /home && \
           . ./lenv/bin/activate && \
-          pip3 install -r requirements.txt && \
+          pip3 install -r requirements.txt  --break-system-packages && \
           xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' pytest -s && \
           deactivate
         "
