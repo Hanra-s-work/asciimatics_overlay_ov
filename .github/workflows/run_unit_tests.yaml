@@ -147,7 +147,7 @@ jobs:
       run: sudo apt-get install xvfb
 
     - name: install venv
-      run: sudo apt-get install python3-venv python-venv -y
+      run: sudo apt-get install python${{matrix.python-version}}-venv python${{matrix.python-version}}-venv -y
     
     - name: Install dependencies
       run: |
@@ -202,5 +202,5 @@ jobs:
     - name: Test with pytest
       run: |
         cd ${{env.CWD}}
-        docker run -t -v "$(pwd)":"/home" /bin/bash -c "apt update -y ; apt upgrade -y ; apt install xvfb python3 python3-venv python3-pip ; cd /home ; . ./lenv/bin/activate ; xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' pytest -s ; deactivate"
+        docker run -t -v "$(pwd)":"/home" /bin/bash -c "apt update -y ; apt upgrade -y ; apt install xvfb python${{matrix.python-version}} python${{matrix.python-version}}-venv python${{matrix.python-version}}-pip ; cd /home ; . ./lenv/bin/activate ; xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' pytest -s ; deactivate"
         # xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" pytest -s
