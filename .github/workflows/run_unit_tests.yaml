@@ -35,6 +35,7 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
+
     - name: Checkout code
       uses: actions/checkout@v4
     
@@ -156,11 +157,13 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ ${#first_requirements} -gt 0 ]; then pip install -r $first_requirements; fi
         python -m venv lenv
+        echo "Activating environement"
         . ./lenv/bin/activate
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ ${#first_requirements} -gt 0 ]; then pip install -r $first_requirements; fi
         deactivate
+        echo "Deactivating environement"
 
     - name: Move le environement out of the build folder
       run: |
@@ -213,5 +216,5 @@ jobs:
     - name: Test with pytest
       run: |
         cd ${{env.CWD}}
-        docker run -t -v "$(pwd)":"/home" /bin/bash -c "apt update -y ; apt upgrade -y ; apt install xvfb python${{matrix.python-version}} python${{matrix.python-version}}-venv python${{matrix.python-version}}-pip ; cd /home ; . ./lenv/bin/activate ; xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' pytest -s ; deactivate"
+        docker run -t -v "$(pwd)":"/home" ubuntu /bin/bash -c "apt update -y ; apt upgrade -y ; apt install xvfb python${{matrix.python-version}} python${{matrix.python-version}}-venv python${{matrix.python-version}}-pip ; cd /home ; . ./lenv/bin/activate ; xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' pytest -s ; deactivate"
         # xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" pytest -s
